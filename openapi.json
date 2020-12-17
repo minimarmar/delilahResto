@@ -1,0 +1,185 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Delilah Resto Api",
+    "description": "Descripcion",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "usuarios",
+      "description": "Usuarios del sistema",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "paths": {
+    "/usuarios": {
+      "post": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "This endpoint allows users to be created",
+        "requestBody": {
+          "description": "User object that needs to be added to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/usuarios"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/usuarios"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Invalid input",
+            "content": {}
+          },
+          "401": {
+            "description": "Username or password invalid",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/usuarios/login": {
+      "post": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "This endpoint allows users to be authenticated",
+        "requestBody": {
+          "description": "User object that needs to be added to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/usuariosForLogin"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/usuariosForLogin"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Invalid input",
+            "content": {}
+          },
+          "401": {
+            "description": "Username or password invalid",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "usuarios": {
+        "type": "object",
+        "required": [
+          "nombre",
+          "apellido",
+          "usuario",
+          "correoElectronico",
+          "telefono",
+          "direccionDeEnvio",
+          "clave"
+        ],
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "apellido": {
+            "type": "string"
+          },
+          "usuario": {
+            "type": "string"
+          },
+          "correoElectronico": {
+            "type": "string"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "direccionDeEnvio": {
+            "type": "string"
+          },
+          "clave": {
+            "type": "string"
+          },
+          "isAdmin": {
+            "type": "boolean"
+          }
+        },
+        "xml": {
+          "name": "usuarios"
+        }
+      },
+      "usuariosForLogin": {
+        "type": "object",
+        "required": [
+          "usuario",
+          "clave"
+        ],
+        "properties": {
+          "usuario": {
+            "type": "string"
+          },
+          "clave": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "usuariosForLogin"
+        }
+      }
+    }
+  }
+}
