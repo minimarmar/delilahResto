@@ -40,6 +40,7 @@ const usuariosController = {
                 isSuccess: false,
                 error: 'Usuario y clave son requeridos'
             })
+            return
         }
 
         const isValid = await validateUsernameAndPassword(usuario, clave);
@@ -48,6 +49,7 @@ const usuariosController = {
                 isSuccess: false,
                 error: 'Usuario y/o clave incorrectos',
             })
+            return
         }
         const token = jwt.sign({ usuario: usuario, isAdmin: await isAdmin(usuario) }, config.jwtSecret);
         res.json(token);
@@ -68,7 +70,7 @@ async function validateCorreoElectronico(email) {
 }
 
 async function validateUsernameAndPassword(usuario, clave) {
-   const usuarioDb = await db.usuarios.findOne({
+    const usuarioDb = await db.usuarios.findOne({
         where: {
             usuario: usuario,
         }

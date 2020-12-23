@@ -1,5 +1,4 @@
-const { response, request } = require("express");
-const { pedidos } = require("../models")
+const { pedidos } = require('../models/index');
 const db = require('../models/index')
 
 const pedidosController = {
@@ -17,7 +16,7 @@ const pedidosController = {
                 estado: req.body.estado, total: req.body.total, formaDePago: req.body.formaDePago, direccion: req.body.direccion
             })
             req.body.productos.forEach(async element => {
-                let producto =await db.productos.findOne({
+                let producto = await db.productos.findOne({
                     where: {
                         id: element.id
                     }
@@ -63,29 +62,53 @@ const pedidosController = {
                 id: req.params.id
             }
         })
-        if (pedido == null)
-            res.status(404).json()
-        await pedido.update({
-            estado: req.body.estado,
-            total: req.body.total,
-            formaDePago: req.body.formaDePago,
-            direccion: req.body.direccion
-        })
+        if (pedido == null) {
+            res.status(400).json({
+                isSuccess: false,
+                error: "Pedido inexistente"
+            });
+        }
         res.status(204).json()
+        try {
+            let productos = []
+            let pedido = await db.pedidos.update({
+                estado: req.body.estado,
+                total: req.body.total,
+                formaDePago: req.body.formaDePago,
+                direccion: req.body.direccion
+            })
+            pedido.setProductos()
+            req.body.productos.forEach(async element => {
+                let producto = await db.productos.findOne({
+                    where: {
+                        id: element.id
+                    }
+                })
+                await pedido.setProductos(producto)
+            })
+            res.status(201).json();
+        }
+        catch (error) {
+            res.status(500).json({
+                isSuccess: false,
+                error: error
+            })
+        }
     },
 
-    //Delete action
-    deletePedidos: async (req, res) => {
-        let pedido = await db.pedidos.findOne({
-            where: {
-                id: req.params.id
-            }
-        })
-        if (pedido == null)
-            res.status(404).json()
-        await pedido.destroy()
-        res.status(204).json()
-    }
+
+//Delete action
+deletePedidos: async (req, res) => {
+    let pedido = await db.pedidos.findOne({
+        where: {
+            id: req.params.id
+        }
+    })
+    if (pedido == null)
+        res.status(404).json()
+    await pedido.destroy()
+    res.status(204).json()
+}
 }
 
 
