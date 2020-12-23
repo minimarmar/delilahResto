@@ -67,17 +67,15 @@ const pedidosController = {
                 isSuccess: false,
                 error: "Pedido inexistente"
             });
+            return
         }
-        res.status(204).json()
         try {
-            let productos = []
-            let pedido = await db.pedidos.update({
+            await pedido.update({
                 estado: req.body.estado,
                 total: req.body.total,
                 formaDePago: req.body.formaDePago,
                 direccion: req.body.direccion
             })
-            pedido.setProductos()
             req.body.productos.forEach(async element => {
                 let producto = await db.productos.findOne({
                     where: {
@@ -97,18 +95,18 @@ const pedidosController = {
     },
 
 
-//Delete action
-deletePedidos: async (req, res) => {
-    let pedido = await db.pedidos.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
-    if (pedido == null)
-        res.status(404).json()
-    await pedido.destroy()
-    res.status(204).json()
-}
+    //Delete action
+    deletePedidos: async (req, res) => {
+        let pedido = await db.pedidos.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        if (pedido == null)
+            res.status(404).json()
+        await pedido.destroy()
+        res.status(204).json()
+    }
 }
 
 
