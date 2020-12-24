@@ -65,7 +65,7 @@ const pedidosController = {
         if (pedido == null) {
             res.status(400).json({
                 isSuccess: false,
-                error: "Pedido inexistente"
+                error: " Pedido inexistente"
             });
             return
         }
@@ -76,15 +76,12 @@ const pedidosController = {
                 formaDePago: req.body.formaDePago,
                 direccion: req.body.direccion
             })
-            req.body.productos.forEach(async element => {
-                let producto = await db.productos.findOne({
-                    where: {
-                        id: element.id
-                    }
-                })
-                await pedido.setProductos(producto)
+            var productos = req.body.productos.map(element => {
+                return parseInt(element.id)
             })
-            res.status(201).json();
+            await pedido.setProductos(productos)
+            res.status(204).json();
+            console.log(pedido)
         }
         catch (error) {
             res.status(500).json({
