@@ -79,6 +79,3 @@ const productosController = {
 
 
 module.exports = productosController
-
-//CARRITO: Detalle -> Lista de productos + Precio | TOTAL $ | FORMA DE PAGO | DIRECCION
-//EXPLORADOR DE PRODUCTOS: Nombre de producto + Precio

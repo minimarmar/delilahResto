@@ -106,15 +106,5 @@ const pedidosController = {
     }
 }
 
-
-
 module.exports = pedidosController
 
-// Detalle de Pedido Particular: 
-// Detalle: [Producto, precio, total]
-// Estados: nuevo, confirmado, preparando, enviando, entregado
-// Forma de Pago: Efectivo
-// Direccion:
-// Datos de usuario: nombre y apellido, usuario, mail y telefono
-
-//Lista de Pedidos: 7 columnas: ESTADO | HORA | NUMERO (de pedido) | DESCRIPCION (Productos) | PAGO (monto) | USUARIO (usuario) | DIRECCION

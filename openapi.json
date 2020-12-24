@@ -70,6 +70,27 @@
             "bearerAuth": []
           }
         ]
+      },
+      "get": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "This endpoint allows admin users to get all the users",
+        "responses": {
+          "400": {
+            "description": "Invalid input",
+            "content": {}
+          },
+          "500": {
+            "description": "Error",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/usuarios/login": {
@@ -331,6 +352,29 @@
           "pedidos"
         ],
         "summary": "This endpoint allows admin users to get orders",
+        "responses": {
+          "400": {
+            "description": "Invalid input",
+            "content": {}
+          },
+          "500": {
+            "description": "Error",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/pedidos/all": {
+      "get": {
+        "tags": [
+          "pedidos"
+        ],
+        "summary": "This endpoint allows users to get their orders",
         "responses": {
           "400": {
             "description": "Invalid input",

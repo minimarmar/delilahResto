@@ -53,7 +53,16 @@ const usuariosController = {
         }
         const token = jwt.sign({ usuario: usuario, isAdmin: await isAdmin(usuario) }, config.jwtSecret);
         res.json(token);
-    }
+    },
+    //Obtener usuarios
+    getUsuarios: async (req, res) => {
+        let usuarios = await db.usuarios.findAll()
+        if (usuarios.length > 0)
+            res.json(usuarios)
+        else
+            res.status(204).json()
+    },
+
 }
 
 // Validar si el correo electronico ya existe dentro de mi DB
