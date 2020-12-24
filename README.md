@@ -48,10 +48,17 @@ Postman es una herramienta que nos permite crear peticiones sobre APIs de una fo
 * Para abrir MYSQL: [Database](https://remotemysql.com/databases.php) y luego acceder a phpmyadmin
 * Ver información de acceso a la DB en el archivo .env
 
-**4) Ejecutar el proyecto**<br>
-```nodemon app```
+**4) Ejecutar el proyecto**
+* Se recomienda poner **'force: true'** al menos una vez en el archivo **'app.js'**, de esta manera se logra hacer el sync con la base de datos.
+* **ALERTA:** Utilizar usar **'force: true'** sólo la primera vez que se corre la aplicación, y luego pasarlo a 'false', caso contrario va a borrar y recrear las tablas.
+
+**Iniciar la aplicacion:**<br>
+`nodemon app`
 
 ## Documentación de la API<br>
+
+* Se recomienda poner **'force: true'** al menos una vez en el archivo **'app.js'**, de esta manera se logra hacer el sync con la base de datos.
+* Se recomienda poner **'force: true'** al menos una vez en el archivo **'app.js'**, de esta manera se logra hacer el sync con la base de datos.
 * Abrir el archivo openapi.js e importarlo en [Swagger](https://editor.swagger.io/)
 * **IMPORTANTE:** Para crear un **usuario ADMIN**, es necesario agregar la propiedad **'isAdmin: true'**, ya que por defecto si no agregamos esta propiedad el usuario no tiene permisos de edición.
 * A continuación se muestra un breve resumen de todos los endpoints disponibles.<br>
